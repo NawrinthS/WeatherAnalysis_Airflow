@@ -1,0 +1,17 @@
+{
+  "s3_bucket": "weather-analysis-open-metro",
+
+  "trigger_checker_path_coordinates": "triggers/static-files/coordinates-files/",
+  "trigger_file_name":"complete.dat",
+  
+  "input_trigger_checker_path": "triggers/open-metro-input-files/",
+  "input_data_path":"open-metro-input-files/",
+
+  "masked_input_trigger_checker_path":"triggers/open-metro-masked-files/",
+  "masked_data_path":"open-metro-masked-files/",
+
+  "processed_input_trigger_checker_path":"triggers/open-metro-processed-files/",
+  "processed_data_path":"open-metro-processed-files/"
+
+  
+}

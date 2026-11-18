@@ -1,0 +1,100 @@
+[2026-10-12T12:28:27.464+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-10-12T12:28:27.501+0000] {taskinstance.py:2632} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_extract_data.create_triggers_file manual__2026-10-11T19:10:27+00:00 [queued]>
+[2026-10-12T12:28:27.517+0000] {taskinstance.py:2632} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_extract_data.create_triggers_file manual__2026-10-11T19:10:27+00:00 [queued]>
+[2026-10-12T12:28:27.519+0000] {taskinstance.py:2885} INFO - Starting attempt 1 of 2
+[2026-10-12T12:28:27.554+0000] {taskinstance.py:2908} INFO - Executing <Task(S3CreateObjectOperator): create_triggers_file> on 2026-10-11 19:10:27+00:00
+[2026-10-12T12:28:27.564+0000] {standard_task_runner.py:72} INFO - Started process 2866 to run task
+[2026-10-12T12:28:27.569+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_extract_data', 'create_triggers_file', 'manual__2026-10-11T19:10:27+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/data_extraction.py', '--cfg-path', '/tmp/tmpcv5mrwse']
+[2026-10-12T12:28:27.574+0000] {standard_task_runner.py:105} INFO - Job 11: Subtask create_triggers_file
+[2026-10-12T12:28:27.661+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_extract_data.create_triggers_file manual__2026-10-11T19:10:27+00:00 [running]> on host 4ca22ddf3f99
+[2026-10-12T12:28:27.791+0000] {abstractoperator.py:793} ERROR - Exception rendering Jinja template for task 'create_triggers_file', field 's3_key'. Template: "triggers/open-metro-input-files//{{ ti.xcom_pull(task_ids='get_conf_date_task')['date_slash'] }}/complete.txt"
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/abstractoperator.py", line 785, in _do_render_template_fields
+    rendered_content = self.render_template(
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/template/templater.py", line 171, in render_template
+    return self._render(template, context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/abstractoperator.py", line 740, in _render
+    return super()._render(template, context, dag=dag)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/template/templater.py", line 127, in _render
+    return render_template_to_string(template, context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/utils/helpers.py", line 301, in render_template_to_string
+    return render_template(template, cast(MutableMapping[str, Any], context), native=False)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/utils/helpers.py", line 296, in render_template
+    return "".join(nodes)
+  File "<template>", line 13, in root
+  File "/home/airflow/.local/lib/python3.10/site-packages/jinja2/runtime.py", line 859, in _fail_with_undefined_error
+    raise self._undefined_exception(self._undefined_message)
+jinja2.exceptions.UndefinedError: 'None' has no attribute 'date_slash'
+[2026-10-12T12:28:27.797+0000] {taskinstance.py:3337} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 282, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 3141, in _execute_task_with_callbacks
+    task_orig = self.render_templates(context=context, jinja_env=jinja_env)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 3564, in render_templates
+    original_task.render_template_fields(context, jinja_env)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 1446, in render_template_fields
+    self._do_render_template_fields(self, self.template_fields, context, jinja_env, set())
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/abstractoperator.py", line 785, in _do_render_template_fields
+    rendered_content = self.render_template(
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/template/templater.py", line 171, in render_template
+    return self._render(template, context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/abstractoperator.py", line 740, in _render
+    return super()._render(template, context, dag=dag)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/template/templater.py", line 127, in _render
+    return render_template_to_string(template, context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/utils/helpers.py", line 301, in render_template_to_string
+    return render_template(template, cast(MutableMapping[str, Any], context), native=False)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/utils/helpers.py", line 296, in render_template
+    return "".join(nodes)
+  File "<template>", line 13, in root
+  File "/home/airflow/.local/lib/python3.10/site-packages/jinja2/runtime.py", line 859, in _fail_with_undefined_error
+    raise self._undefined_exception(self._undefined_message)
+jinja2.exceptions.UndefinedError: 'None' has no attribute 'date_slash'
+[2026-10-12T12:28:27.825+0000] {taskinstance.py:1242} INFO - Marking task as UP_FOR_RETRY. dag_id=weather_extract_data, task_id=create_triggers_file, run_id=manual__2026-10-11T19:10:27+00:00, execution_date=20261011T191027, start_date=20261012T122827, end_date=20261012T122827
+[2026-10-12T12:28:27.881+0000] {taskinstance.py:349} INFO - ::group::Post task execution logs
+[2026-10-12T12:28:27.883+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 11 for task create_triggers_file ('None' has no attribute 'date_slash'; 2866)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 3030, in _run_raw_task
+    return _run_raw_task(
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 282, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 3141, in _execute_task_with_callbacks
+    task_orig = self.render_templates(context=context, jinja_env=jinja_env)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 3564, in render_templates
+    original_task.render_template_fields(context, jinja_env)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 1446, in render_template_fields
+    self._do_render_template_fields(self, self.template_fields, context, jinja_env, set())
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/abstractoperator.py", line 785, in _do_render_template_fields
+    rendered_content = self.render_template(
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/template/templater.py", line 171, in render_template
+    return self._render(template, context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/abstractoperator.py", line 740, in _render
+    return super()._render(template, context, dag=dag)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/template/templater.py", line 127, in _render
+    return render_template_to_string(template, context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/utils/helpers.py", line 301, in render_template_to_string
+    return render_template(template, cast(MutableMapping[str, Any], context), native=False)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/utils/helpers.py", line 296, in render_template
+    return "".join(nodes)
+  File "<template>", line 13, in root
+  File "/home/airflow/.local/lib/python3.10/site-packages/jinja2/runtime.py", line 859, in _fail_with_undefined_error
+    raise self._undefined_exception(self._undefined_message)
+jinja2.exceptions.UndefinedError: 'None' has no attribute 'date_slash'
+[2026-10-12T12:28:27.902+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2026-10-12T12:28:27.938+0000] {taskinstance.py:3925} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-10-12T12:28:27.943+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
